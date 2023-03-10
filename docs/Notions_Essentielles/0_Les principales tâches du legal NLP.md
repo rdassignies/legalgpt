@@ -4,7 +4,7 @@ Il faut distinguer les tâches généralistes de celles qui sont spécifiques à
 
 Cette image qui décrit les fonctionnalité de la suite logicielle "legal NLP" montre quelques unes des fonctionnalités clés du legal NLP :
 
-![Legal NLP - John Snow Lab https://www.johnsnowlabs.com/legal-nlp/](assets/img/legal_nlp_johnsnowlab.png)
+![Legal NLP - John Snow Lab https://www.johnsnowlabs.com/legal-nlp/](../assets/img/legal_nlp_johnsnowlab.png)
 *Source : (Legal NLP - John Snow Lab https://www.johnsnowlabs.com/legal-nlp/)*
   
 En matière de legal NLP, les traitements sont généralement :
