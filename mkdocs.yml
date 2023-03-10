@@ -1,4 +1,4 @@
-site_name: Legal GPT (test)
+site_name: Legal GPT
 theme:
   name: material
  
@@ -6,6 +6,8 @@ theme:
     - navigation.tabs
     - navigation.sections
     - navigation.indexes
+    - navigation.tracking
+    - toc.follow
     - toc.integrate
     - navigation.top
     - search.suggest
@@ -63,7 +65,8 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
-  
+extra_javascript:
+  - https://embed.trydyno.com/embedder.js
 
 copyright: |
   &copy; 2023 <a href="https://github.com/rdassignies"  target="_blank" rel="noopener">Raphaël d'Assignies</a>
