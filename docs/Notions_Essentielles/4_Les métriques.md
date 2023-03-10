@@ -69,7 +69,7 @@ Le résultat du classement opéré par le modèle est le suivant :
 
 Le modèle a fait des erreurs ! C'est à dire qu'il a mal classé des clauses. 
 
-![Clauses pénales classification](assets/img/metrics_1_clausespenales.drawio.png)
+![Clauses pénales classification](../assets/img/metrics_1_clausespenales.drawio.png)
 
 Si on veut évaluer l'exactitude du modèle, on peut évaluer le nombre de fois où il attribue correctement la bonne classe aux clauses : sur 1000 clauses, il a classé correctement respectivement 620 et 240 clauses correctement soit 860/1000 ou 86% d'exactitude. C'est un très bon score. Trop bon ? 
 
@@ -93,7 +93,7 @@ Cependant, on peut modifier ce chiffre assez facilement en jouant sur le seuil d
 
 Le graphique suivant illustre les conséquences de la modification du seuil de déclenchement. 
 
-![Precision Recall clause pénale](/assets/img/repartition_metrics_clausepenales.png)
+![Precision Recall clause pénale](../assets/img/repartition_metrics_clausepenales.png)
 
 Si on augmente le seuil au delà duquel le modèle considére que la clause est une clause pénale (classe 1), il y a un effet de vase communicant : 
 - les faux positifs diminuent et viennent alimenter les vrais négatifs 
