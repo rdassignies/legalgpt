@@ -43,7 +43,7 @@ Rapidement, il est apparu que le prompting standard n'était pas efficace dans d
 
 Fort de ce constat, un papier a proposé une approche plus ambitieuse en fournissant, toujours via le *prompt*, les étapes que le modèle doit accomplir pour aboutir au résultat final. C'est approche est appelée[ 'Chain of Thought Prompting'](https://arxiv.org/pdf/2201.11903.pdf)
 
-![Chain of Tought](/assets/img/Chain_Of_Thought_Prompt.png)
+![Chain of Tought](../assets/img/Chain_Of_Thought_Prompt.png)
 
 Dans cette approche, on a toujours une structure générale de quelques exemples de Questions/Réponses mais on explicite dans la réponse le chemin à parcourir pour obtenir la solution. Cette stratégie obtient de très bons résultats mais elle n'est efficace que sur les modèles de language avec de nombreux paramètres (supérieur à 100 millards). 
 
@@ -66,13 +66,13 @@ Toujours est-il qu'il existe quelques règles, parfois contre-intuitives, concer
 
 ### Prompts standards  : 
 
-![Standard Prompt](/assets/img/standard_prompt.png)
+![Standard Prompt](../assets/img/standard_prompt.png)
 
 ### Chain of Thought 
 
 Dans cet exemple, GPT (davinci 003) se trompe et n'arrive pas à "raisonner" pour trouver la bonne réponse. 
 
-![Chain Of Thought](/assets/img/CoT_Prompt_1.png)
+![Chain Of Thought](../assets/img/CoT_Prompt_1.png)
 
 On raffine le prompt en ajoutant : 
 
@@ -81,11 +81,11 @@ On raffine le prompt en ajoutant :
 
 Dans ce cas, il arrive au bon résultat en explicitant les étapes de son raisonnement. 
 
-![Chain Of Thought Magic Few Shots](/assets/img/CoT_Prompt_2.png)
+![Chain Of Thought Magic Few Shots](../assets/img/CoT_Prompt_2.png)
 
 Il est possible, pour se passer de lui décrire quelques exemples, d'introduire un prompt "magique" du type "Décris moi les étapes de ton raisonnement. ". On parlera de *zeroshot Chain Of Thought*. 
 
-![Chain Of Thought Magic Prompt](/assets/img/CoT_MagicPrompt.png)
+![Chain Of Thought Magic Prompt](../assets/img/CoT_MagicPrompt.png)
 
 
 -------
