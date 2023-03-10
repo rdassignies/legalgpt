@@ -1,7 +1,5 @@
 # Ontologie et Knowledge Graph
-Liens : 
-https://www.topbots.com/guide-to-knowledge-graphs/
-https://pub.towardsai.net/automatic-knowledge-graphs-the-impossible-grail-ef71f9c8aad8
+
 
 En informatique, une ontologie est "Corpus structuré de concepts, qui est modélisé dans un langage permettant l’exploitation par un ordinateur des relations sémantiques ou taxonomiques établies entre ces concepts". Dit autrement, c'est une manière structurer des connaissances en vue d'être utilisé par des machines.
 
@@ -32,7 +30,7 @@ Dans cette ontologie, on retrouve les textes juridiques découpés en chapitre, 
 
 Voici une visualisation de l'ontologie originale [au format OWL](https://www.w3.org/OWL/) via l'outil gratuit [Protégé](https://protege.stanford.edu/) : 
 
-![Protege](assets/img/protege_snapshot.png)
+![Protege](../assets/img/protege_snapshot.png)
 
 On y aperçoit toute une série de concepts : le consentement de la personne concernée, les activités sur responsable de traitement, les exceptions ou les grandes principes. Ces concepts sont organisés hierarchiquement ou de manière transverse via une relation d'implication ('involves'). Ils sont rattachés au texte *via*une relation nommée 'is defined by'. 
 
@@ -53,7 +51,7 @@ Revenons au RGPD. Sans présenter la volumétrie des * Panama Papers*, c'est une
 
 Voici une illustration à partir de quelques noeuds extrait de la base RGPD dans AuraDB : 
 
-![Graph de connaissance du RGPD](/assets/img/rgpd_graph_sample.jpg)
+![Graph de connaissance du RGPD](../assets/img/rgpd_graph_sample.jpg)
 
 Cet outil possède un language de requête qui lui est propre (Cipher) qui permet entre autres : 
  - de rapatrier tous les relations entrantes et sortantes depuis un noeud 
@@ -78,5 +76,8 @@ la création automatique d'ontologie se heurte à de nombreux obstacles parmi le
 Liens sur la génération de Graph à partir de GPT : 
 - https://medium.com/neo4j/knowledge-graph-based-chatbot-with-gpt-3-and-neo4j-c4ebbd325ed
 - https://towardsdatascience.com/gpt-3-for-doctor-ai-1396d1cd6fa5
+- https://www.topbots.com/guide-to-knowledge-graphs/
+- https://pub.towardsai.net/automatic-knowledge-graphs-the-impossible-grail-ef71f9c8aad8
+
 
 
