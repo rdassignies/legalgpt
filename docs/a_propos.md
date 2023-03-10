@@ -1,6 +1,6 @@
 # A propos 
 
-Ce site regroupe mes notes depuis 2019 concernant le Traitement Automatique des Langues (Natural Language Processing) appliqué au domaine juridique. 
+Ce site  regroupe mes notes depuis 2019 concernant le Traitement Automatique des Langues (Natural Language Processing) appliqué au domaine juridique. 
 
 J'ai pensé qu'elles pourraient être utiles compte tenu du  récent engouement pour les *Large Language Model* et de l'effervescence qui entoure désormais la matière. 
 
