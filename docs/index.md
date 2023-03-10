@@ -42,8 +42,6 @@ Le traitement automatique du langage ou NLP (Natural Language Processing) a conn
 
 Pour les juristes, cette branche de l'IA joue un rôle central car elle permet d'extraire des informations à partir de données, écrites ou vocales, non structurées. On entend par non structurées des données qui ne sont pas formattées à l'origine pour être exploitées. Elles peuvent être de sources très variées : correspondance, jurisprudence, articles de doctrine, actes de procédure... A l'inverse,  [[les datasets pré formattés pour l'apprentissage de tâches précises]] sont un exemple de données structurées.
 
-Cette absence de formalisme comme l'illustre, par exemple, les phases de l'analyse d'un contrat. 
-
 ### Illustration : les étapes de traitement pour l'analyse d'un contrat
 
 Je reprends ici les grandes lignes de la mise en œuvre du projet d'audit de documents, présenté en formation, en utilisant plusieurs briques technologies dont la recherche sémantique et le traitement de document à l'aide de LLM. 
@@ -60,7 +58,7 @@ Toutes les briques logicielles pour ces traitements existent avec une fiabilité
 
 ## Homme vs Machine 
 
-D'emblée, on voit que cela nécessite de mettre en œuvre une pyramide de techniques pour ce qui peut prendre quelques minutes à un humain. 
+D'emblée, on voit que l'automatisation nécessite de mettre en œuvre une pyramide de techniques pour ce qui peut prendre quelques minutes à un humain. 
 
 Cependant, la machine présente des avantages comparatifs : 
 
@@ -89,7 +87,7 @@ Cette approche admet plusieurs limites :
 
 ### Les difficultés de l'implémentation d'un raisonnement juridique
 
-Pour réellement arriver à raisonner, il faudrait que nos techniques de NLP puissent de manière efficiente générer automatiquement des ontologies capables d'orchestrer les connaissances et de leur appliquer des mécanismes de raisonnement.  
+Pour réellement arriver à raisonner, il faudrait que nos techniques de NLP soient capables d'orchestrer les connaissances et de leur appliquer des mécanismes d'inférence.
 
 Les [[ontologie_knowledge_graph |ontologies et/ou les graphs de connaissance ]]présentent des avantages certains pour appréhender le raisonnement juridique. Ci-dessous, une approche du RGPD que j'ai implémentée dans [une base de données spécialisée ](https://neo4j.com/). La connaissance est représentée sous forme de triplets sujet-verbe-objet. 
 
@@ -109,9 +107,8 @@ Comme nous l'avons mentionné, les LLM apportent des avancées importantes qui p
 
 #### L'apprentissage avec pas ou peu d'exemples (*zero shot & few shots learning*)
 
-Cette caractéristique, sur laquelle je reviens en détail dans [[LLM_art_prompting |l'art du *prompting*]] permet au modèle d'être utilisé pour des tâches spécifiques en lui fournissant aucun ou très peu d'exemples. 
-
-C'est un atout car il  vient pallier la rareté et le coût de constitution des données labélisées disponibles en droit français.  
+Cette caractéristique, sur laquelle je reviens en détails dans [[LLM_art_prompting |l'art du *prompting*]] permet au modèle d'être utilisé pour des tâches spécifiques en lui fournissant aucun ou très peu d'exemples. 
+Elle représente un atout car il  vient pallier la rareté et le coût de constitution des données labélisées disponibles en droit français.  
 
 Par exemple, le *prompt*  "Extrait les textes de lois et les entités nommés du texte suivant au format csv." appliqué à l'[arrêt de la chambre criminelle du 29 novembre 2022](https://www.legifrance.gouv.fr/juri/id/JURITEXT000046683011?dateDecision=&init=true&page=1&query=convention+secr%C3%A8te&searchField=ALL&tab_selection=juri) donne le résultat suivant : 
 
@@ -119,7 +116,7 @@ Par exemple, le *prompt*  "Extrait les textes de lois et les entités nommés du
 
 Bien entendu, ces résultats sont à affiner et à évaluer. Cependant, on aperçoit le caractère remarquable de GPT (*davinci-003*) à reconnaître des entités là où il fallait entraîner au préalable un modèle avec plusieurs milliers d'exemples. C'est une des illustrations de la puissance du *zero shot learning*. 
 
-Il serait intéressant de comparer les résultats au tryptique titrages, résumés, textes appliqués fourni par le bulletin. 
+Il serait intéressant de comparer les résultats au tryptique titrages, résumés, textes appliqués fourni par le Bulletin. 
 
 En revanche, cette habileté seule ne permet pas de raisonner mais de se passer d'un long et coûteux apprentissage. Si ces modèles peuvent faire économiser du texte, ont-ils l'aptitude à bâtir un schéma de connaissance ? 
 
@@ -138,17 +135,17 @@ Les documents juridiques prennent des formes variées et n'obéissent pas à des
 
 ### L'identification de la structure documentaire
 
-Naturellement, la structuration de la matière conduit à produire du contenu plus structurés qu'ailleurs mais le formalisme peut être plus ou moins strict. 
+Certes, la matière juridique conduit à produire du contenu plus structuré que dans d'autres domaines mais le formalisme peut être plus ou moins strict. 
 
-En matière de décision de justice, il n'existe pas de structure réellement unifiée même si on peut s'appuyer sur des [plans de classement parfois très performant]([administrative](https://www.legifrance.gouv.fr/affichNomenclatureAdmin.do?id=CETANOME000008361640)) Le blog d'Emmanuel Barthe en fournit un [intéressant état des lieux. ](https://www.precisement.org/blog/Intelligence-artificielle-en-droit-derriere-la-hype-la-realite.html#nb255)
+Par exemple, il n'existe pas de structure réellement unifiée respectée par les décisions de justice même si l'on peut s'appuyer sur des [plans de classement parfois très performant]([administrative](https://www.legifrance.gouv.fr/affichNomenclatureAdmin.do?id=CETANOME000008361640)). Le blog d'Emmanuel Barthe en fournit un [intéressant état des lieux. ](https://www.precisement.org/blog/Intelligence-artificielle-en-droit-derriere-la-hype-la-realite.html#nb255)
 
 Dans la documentation produite par les avocats, il existe également une grande variété de structures. La répétition de schémas types comme en matière contractuelle permet d'[entraîner des  modèles de machine learning classiques](https://aclanthology.org/2021.nllp-1.15/) pour extraire la structure hiérarchique et les unités de texte (paragraphes) pour effectuer des traitements en aval. 
 
 ### Quel niveau de granularité ?
 
-Un problème courant en NLP est la taille des données à traiter. L'architecture [[Les Transformers|des transformers]] conduit à une limitation des séquences en entrée qui peuvent être traitées en même temps. Cette limitation porte sur le nombre de tokens (à peu près 0,75 mots). 
+Un problème courant en NLP est la taille des données à traiter. L'architecture [[Les Transformers|des transformers]] conduit à une limitation des séquences en entrée qui peuvent être traitées en même temps. Cette limitation porte sur le nombre de tokens (un token égal à peu près 0,75 mot ). 
 
-La plupart des documents juridiques dépassent largement la fenêtre utilisée par ces modèles. 
+La plupart des documents juridiques dépassent largement la fenêtre, comprise entre 500 et 4000 tokens, utilisée par ces modèles. 
 
 Cette caractéristique contraint à segmenter le texte en plusieurs morceaux avec une perte inévitable d'informations. Une des solutions, illustrée dans la mise en pratique sur le moteur de recherche sémantique, consiste à superposer partiellement les segments mais cette solution n'est pas toujours satisfaisante. En effet, le découpage arbitraire amène parfois à dégrader l'analyse du sens. 
 
