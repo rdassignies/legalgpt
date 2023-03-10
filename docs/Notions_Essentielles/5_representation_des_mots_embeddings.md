@@ -20,7 +20,7 @@ phrases = [
 
 La première approche est de compter le nombre de mots dans chacune d'elle. On a supprimer les mots non signifiants (stopwords) comme les déterminants pour ne conserver que les mots ayant une valeur sémantique. 
 
-![Term document matrix](/assets/img/document_terms_matrix_onehot.png)
+![Term document matrix](../assets/img/document_terms_matrix_onehot.png)
 
 Pour chaque phrase, on a référencé les mots qui y sont contenus. La phrase est le contexte du mot. 
 
@@ -33,7 +33,7 @@ L'idée est d'attribuer un poids aux mots en fonction de deux facteurs :
 - TF : leur nombre d'apparition dans le texte (ici des phrases)
 - IDF : leur nombre d'apparition dans tout le corpus (dans toutes les phrases)
 
-![TFIDF Term Documents Matrix](/assets/img/tfidf_document_matrix.png)
+![TFIDF Term Documents Matrix](../assets/img/tfidf_document_matrix.png)
 
 Désormais, les mots sont répartis en fonction de leur poids. On voit que le mot "données" a des valeurs dans toutes les phrases sauf une. Si on lit la colonne le concernant, on voit la distribution des contextes. Par exemple, il ne pèse rien en ce qui concerne la justice ou les juges dans notre corpus puisqu'il n'y apparaît pas. On voit que ces superpositions permettent de donner un sens contextualisé au mot. 
 
@@ -43,7 +43,7 @@ Dans notre exemple précédent, le contexte est une phrase mais on peut généra
 
 On isole un (n=1) mot avant et un après un autre puis on reconstitue des phrases (les contextes). On fait le même calcul TF-IDF et on obtient la matrice suivante : 
 
-![Windows context matrix](/assets/img/context_matrix.png)
+![Windows context matrix](../assets/img/context_matrix.png)
 
 En découpant de la sorte, on a plus de contextes qui apparaissent donc on affine dans quel espace sémantique les mots sont référencés. Si on isole les colonnes, on obtient des tableau de nombre qui positionne le mot dans un espace vectoriel. 
 
