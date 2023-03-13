@@ -51,13 +51,11 @@ Pour pallier ces inconvénients, une autre approche est d'utiliser le prompting 
 
 Une solution simple consiste à contraîndre le modèle par une instruction de type "Fourni une réponse la plus fiable possible et, si tu n'es pas sûr de ta réponse, répond "Désolé, je ne sais pas". Ce simple prompt permet de limiter le modèle dans la confiance qu'il apporte à la réponse en principe ... 
 
-A ce sujet, il n'existe pas à ma connaissance d'étude détaillé qui permette de faire une évaluation sur un grand nombre d'exemples. 
-
-De manière plus efficace, selon moi, est d'ajouter un contexte au prompt. Le contexte consiste à limiter la réponse au prompt avec un élement de contenu particulier. 
+Une manière plus efficiente est, selon moi, d'ajouter un contexte au prompt. Le contexte consiste à limiter la réponse au prompt par le LLM avec un élement de contenu particulier qui va restreindre sa completion comme l'illustre l'exemple suivant: 
 
 
-![Prompt GPT openAI 1](/assets/img/prompt_gpt_ccass1.png)
-![Prompt GPT openAI 1](/assets/img/prompt_gpt_ccass2.png)
+![Prompt GPT openAI 1](../assets/img/prompt_gpt_ccass1.png)
+![Prompt GPT openAI 1](../assets/img/prompt_gpt_ccass2.png)
 Cet angle semble plus prometteur et plus sûr que la première approche plus générale. Mais cela ne répond pas à la question de l'actualisation des connaissances. Cette problématique fait l'objet depuis plusieurs années de travaux de recherche. Une des solutions consiste à mixer les LLM avec des outils de recherche sémantique plus "traditionnelles"
 
 ## L'approche in-context RALM (Retrieval Augmented Language Model)
@@ -94,6 +92,8 @@ Ce modèle présente plusieurs avantages :
 - l'information peut être mise à jour en temps réel car la base de connaissance est dynamique; 
 - l'information est fiable car maîtrisée par le maître d'oeuvre
 - les résultats utilisent la puissance des LLM pour effectuer des tâches comme les questions/réponses ou des résumés. 
+
+Parmi les projets en cours, deux abordent cette question sous l'angle de la recherche sémantique et de la capacité à retravailler les résultats obtenus en utilisant les LLM. 
 
 ---------------------
 
