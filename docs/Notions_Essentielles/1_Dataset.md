@@ -41,7 +41,6 @@ Les datasets  sont constitués d'une quantité très importante de textes d'orig
 - petites annonces & forums
 - ...
 
-
 A ce sujet, **la transparence n'est pas la règle** et les papiers de recherche, édités à l'appuie des nouveaux modèles, ne sont pas précis sur la répartition des matières ou les volumes finaux traités lors de l'apprentissage. 
 
 Un des sujets clés à l'avenir est la récension structurée des données d'entraînement en s'appuyant sur les normes existantes par exemple en matière de *Big Data* et une analyse de risque claire à ce stade des projets. 
