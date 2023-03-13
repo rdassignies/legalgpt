@@ -77,7 +77,7 @@ Imaginons que le modèle ait classé toutes les clauses en non clause pénale so
 
 ### La matrice de confusion
 
-La matrice de confusion est construire en comparant les prédictions faites par le modèle et la réalité. Elle va être utilisée pour calculer les métriques de classification. 
+La matrice de confusion est construite en comparant les prédictions faites par le modèle et la réalité. Elle va être utilisée pour calculer les métriques de classification. 
 
 Dans notre exemple, cette matrice se présente de la manière suivante : 
 
