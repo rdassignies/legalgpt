@@ -1,134 +1,103 @@
 # L'utilisation des modèles pré-entraînés
 
-Liens :
-https://arxiv.org/abs/2108.07258
 
-La performance des modèles de type LLM repose sur leur capacité d'ingestion d'un nombre considérable de données. L'autre facteur de performance est le nombre de paramètres entraînable grâce à de nouvelles architecture (les Tranformers) et la capacité de nouvelles unités de calcul (les GPU). 
+En matière de traitement du language, il est extrémement fréquent d'avoir recours à un modèle déjà existant que l'on re-entraîne sur des tâches spécifiques. 
 
-La conséquence a été l'émergence de modèles avec un nombre de paramètres dépassant plusieurs milliards comme l'illustre le graphique ci-dessous. 
+Ce phénomène est d'abord apparu avec les images au début des années 2010 puis, à partir de 2018 et la sortie du modèle BERT, s'est invité dans le monde du NLP. 
 
-![inflations paramètres LLM](/assets/img/parameter_size_microsoft.png)
+Auparavant, les tâches étaient silotées ainsi que les équipes de recherche. On distinguait classiquement plusieurs catégories :
+
+- la classification d'une phrase ou d'un document (spam, fake news, critique, ...)
+- ll labelisation de séquences (prévoir la nature grammatical d'un mot, reconnaître des entités)
+- l'établissement des relations entre les séquences (sujet, verbe, objet)
+- la génération de texte : traduire ou résumé par exemple. 
+
+A chacune de ces tâches, on associait un modèle, des données et un entraînement. Désormais, l'état de l'art est d'utilisé un premier modèle comme socle de connaissance puis d'entraîner des couches de neurones spécifiques associées à des données nouvelles en vue de spécialiser l'ensemble. 
+
+Ce nouveau paradigme a des implications qui vont bien au delà des aspects purement technique de la discipline. Avant de décrire sommairement la traduction technique et concrète pour les praticiens,  il faut revenir sur l'origine de ce phénomène. 
+
+
+## Des modèles pré entraînés aux *foundation models*
+
+### Les conditions de l'émergence 
+
+L'émergence de cette pratique épouse les mêmes conditions que le succès fulgurant du *deep learning*  ces dernières années : 
+
+ - augmentation de la puissance machine grâce au GPU; 
+ - élaboration de nouvelle architecture plus facilement entraînable (Transformers); 
+ - explosition du nombre de données disponibles. 
+
+C'est ce dernier phénomène qui a été le plus massif dans le secteur du langage. Dans le secteur, il est fait recours massivement à l'apprentissage auto-supervisé  (*self supervised learning*). Par exemple, un modèle qui vise à apprendre à générer des mots a uniquement besoin de phrases en entrée. Le label est constitué par le mot qui est masqué et qui doit être découvert par le modèle.  
+
+Cet aspect est essentiel car il a permis de recourir à une volumétrie massive de données à moindre coût car sans intervention humaine. Cette manière d'entraîner les modèles est l'état de l'art en NLP depuis 2019. 
+
+Le monde de la recherche a rapidement établi que l'alliance de ces modèles sur étagère associés à des couches spécialisées, dans le cadre d'une approche dite de  *transfer learning* (1976, Bozinovski) ,étaient bien plus performante que l'état de l'art antérieur basé sur des architecttures spécialisées. 
+
+Dès lors, une course effrénée  dans la création de modèles toujours plus massif aussi bien en terme de volumes de données d'entraînement qu'en nombre de paramètres comme en témoigne ce graphique : 
+
+
+![inflations paramètres LLM](../assets/img/parameter_size_microsoft.png)
 *Trend of sizes of state-of-the-art NLP models over time on a logarithmic scale*
 *Source: Microsoft Research blog post on 11th Oct 2021*
 
-Cette inflation pèse sur les coûts d'entraînement et la capacité à délivrer les inférences. Ces deux postes de dépenses ne sont pas accessible à la plupart des acteurs publics ou privés.
 
-Ce phénomène a également favorisé l'émergence des *Foundation Models*, c'est à dire de modèles généralistes servant de socle de base à des entraînements spécialisés. 
+### La formalisation du concept de modèle socle ou *foundation model*
 
-Ces deux caractéristiques, performance des modèles liés à leur obésité et le facteur coût, influence fortement les modes de consommation pour les utilisateurs. 
+Née de la pratique, les modèles pré entraînés ont rapidement été renommés *foundation model* ou modèle socle pour signfier à la fois leur place dans l'architecture finale mais également les enjeux fondamentaux en jeu bien au delà du domaine du *machine learning*. 
 
-Sans entrer dans les détails, je détaillerai  les avantages de la réutilisation après avoir expliciter leurs contours et modalités. Enfin, plusieurs points critiques seront soulevés car ils peuvent avoir des impacts éthiques/juridiques clés dans le cadre de projet d'IA touchant au language. 
+Je ferai une étude plus détaillé sur les implications, notamment juridique, de cette pratique de l'industrie. 
+
+Pour l'heure, d'autres aspects commandent les modalités pratiques d'utilisation avec ses avantages et ses risques. 
+
+## L'utilisation des foundations models 
+
+
+La production de ces modèles massifs n'est accessible qu'à quelques entreprises sur le plan mondial compte tenu des ressources et des compétences à mobiliser. 
 
 
 
-## Le phénomènes des *Foundation Models*
+Cet constat a provoqué également un arrêt partiel des pratiques permettant d'étudier et de reproduire les modèles en laboratoire. A cela, il faut ajouter, comment mentionné dans la partie sur les datasets, la gestion d'une volumétrie gigantesque et l'absence de transparence qui caractérise souvent l'industrie privée dans ce domaine. 
+
+Dans ce panaroma pessimiste, il faut mentionner plusieurs initiatives visant à contre- carrer cette évolution comme [Eleuther.ai](https://www.eleuther.ai/) ou [BLOOM ](https://huggingface.co/bigscience/bloom)à l'initiative de la société HuggingFace et qui a reçu des financements publics français. 
+
+Cet état de fait ne se limite pas à la production mais influe également l'utilisation car les conditions techniques et [le coût économique associé](https://www.forbes.com/sites/johnkoetsier/2023/02/10/chatgpt-burns-millions-every-day-can-computer-scientists-make-ai-one-million-times-more-efficient/?sh=6a05825c6944) pour mettre en oeuvre les inférences est là encore démésuré. 
+
+## Panorama des conditions d'utilisation
+
+
+De manière simplifiée le schéma d'utilisation est le suivant : 
+
 ``` mermaid
 flowchart BT
 
-A[Données] -- Training --> B[Foundation Model]
-	B --> C[Modèle : choix, développement, apprentissage]
-	C --> D[Intégration]
-	D --> E[Déploiement]
+A[Données Massives] -- Training --> B[Foundation Model]
+	B --> C[Données spécialisées]
+	C --> D[Couche d'adaptation]
+	D --> E[Modèle adapté]
 
 
 ```
 
 
-## Les modalités de la ré-utilisation
+L'objectif est de se servir d'un modèle de base qui présente une performance élevé dans des tâches généralistes pour le spécialiser à travers différents opérations : 
 
+### Le transfer learning 
 
+Cette opération consiste à entraîner spécifiquement une ou plusieurs couches de neurones supplémentaire adaptées à l'objectif final(classification, labélisation, ...). 
 
+Cet entraînement nécessite également des données métiers mais en quantité bien moindre que les données généralistes de base. Cette disproportion n'est pas sans causer parfois des problèmes de cohabitation. 
 
-Les avantages 
+On aboutit, au final, à un modèle hybridé qui est souventplus performant qu'un réseau entraîné seul mais [ce n'est pas toujours le cas.](https://arxiv.org/pdf/2211.02563.pdf) 
 
-Cette situation 
-La réutilisation correspond à des besoins précis exprimés par le marché. Cette consommation de modèle sur étagère autorise un adaptation partielle mais elle n'est pas sans risque notamment en raison de la dépendance qu'elle fait naître vis à vis du fournisseur. 
+### Zero ou few shots learning
 
-Cette forme de consommation fait accroître la dépendance vis à vis des fournisseurs dans certains cas. 
+Cette pratique a émergé avec les modèles de type LLM (*Large Language Model*) comme GPT. On évoque là des archictures dont les paramètres sont supérieurs à plusieurs centaines de millions. 
 
-Les avantages de la réutilisation
+Elle consiste à piloter le modèle en lui donnant des instructions ou très peu d'exemples. On utilise alors sa capacité généraliset en l'orientant spécifiquement. Je reviens sur ce phénomène dans l'art du prompting. 
 
-Rapidité 
-Coût 
-Double effet boîte noir 
+### Utilisation packagée
 
-Des solutions sous forme de librairie ou en SaaS
+J'entends par là, l'utilisation de solutions proposés et déjà entraînés dans des domaines particuliers. 
 
-OpenAI
-HuggingFace 
+Ainsi, vous trouverez chez Amazon ou Google, des services prêt à l'emploi permettant de libre des papiers d'identité, des factures, des déclarations de revenus (US) ou des documents comptables. 
 
-L'adaptation des modèles 
-
-fine tuning
-prompting
-
-
-
-
-Postion du problème : les paramètres figés d'un modèle 
-
-Ce document ne fait pas référence [[au prompting]] ce qui est problématique car c'est une manièr d'utiliser les modèles. 
-
-## Une grande variété de modèles 
-
-Depuis 2017, de [nombreux modèles de transformers](Zoom sur la connaissance paramétrique ) ont été entraînés. Surtout, de nombreuses variations ont été élaborés, parmi lesquelles : 
-- [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/abs/1810.04805), Jacob Devlin et al.
-- [FlauBERT: Unsupervised Language Model Pre-training for French](https://arxiv.org/abs/1912.05372), Hang Le et al.
-- 
-
-De nombreuses librairies logicielles permettent de les utiliser tel quel ou après une opération de fine-tuning. 
-
-
-
-## L'utilisation des modèles 
-
-### utilisation après fine-tuning 
-
-``` mermaid
-flowchart TD 
-	direction RL
-	A[Données spécifiques] --> B[LLM pré entraîné] 
-	B --> C[Couche d'Adaptation]
-	C --> D(Sorties adaptées)
-
-```
-
-### utilisation tel quel  avec invite de commande (prompting)
-
-Le P de GPT signifie pré-entraîné. L'objectif premier est de générer des mots en fonction des précédents. La masse d'information utilisée et le nombre de paramètres sont tellement considérables que l'on s'est rapidement aperçu que ces modèles de la famille des Large Language Model (LLM) étaient capables de répondre à plusieurs tâches : classification, reconnaissance d'entité, résumé, question/réponse, ... Alors qu'il fallait auparavant plusieurs modèles spécialisées, ils sont capables d'être multi-tâche alors qu'ils n'ont été entraîné pour aucune d'elle en particulier. Mieux encore, ils peuvent s'en acquitter avec un paramètrage minimal comme nous le verrons.
-
-Le tableau ci-après illustre l'inflation considérable du nombre de paramètres des modèles qui constituent une facteur de performance mais aussi une barrière à l'entrée.
-|  
-
-
-
----
-
-
-
----
-
-Avant d'utiliser GPT3, il faut transformer les mots en unité élémentaire appelée tokens.
-
-
-Dans notre exemple précédent, concernant le modèle word2vec, on s'est contenté d'isoler les mots un par un et de bâtir un vocabulaire. En NLP, la notion de token est plus large que celle de mots. C'est une unité élémentaire qui est utilisé par un modèle - un réseau de neurones - pour apprendre une tâches. Il peut représenter un mot, une partie de mots, un caractère unique, un signe de ponctuation, un caractère spécial ou spécifique à un modèle, etc. D'ailleurs, dans la documentation d'openAI, il est indiqué qu'un token équivaut, en anglais, à 0,75 mots.
-
-  
-
-Un modèle comme GPT consomme des tokens en entrée. Cela signifie qu'il faut d'abord transformer vos données en tokens avant leur utilisation par le modèle. Les tokenizers modernes, comme ceux utilisé par la famille GPT, permettent de ne pas avoir de mots qui ne serait pas dans la vocabulaire car ils utilisent des sous-parties leur permettant de recomposer les mots inconnus qu'il pourrait voir hors des données d'entraînement.
-
-Le nombre de tokens que le modèle peut consommer en entrée est limitée. Cela est vrai de tous les transformers qui traitent des séquences de longueur fixe en entrée. L'interface d'OpenAI fournit d'ailleurs un compteur de tokens. C'est également l'unité de mesure du prix facturé qui est fondé sur le nombre de tokens consommé à chaque appel de l'API.
-
-Une fois la phrase tokénisée, le modèle produit une donnée de sortie qui correspond à la probabilité qu'un mot soit le suivant de ceux déjà renseigné. En réalité, il s'agit des probabilités distribuées à travers tous les tokens qui compose le vocabulaire du modèle. On peut choisir la plus élevé mais également celle qui sont plus rares. L'essentiel est que la génération reste cohérente. Parfois, le modèle hallucine au sens où la réponse est valable sur le plan formel mais incohérente dans son sens.
-
-Cette phase de sortie peut être paramètrée via l'interface d'openAI ou de la plupart des librairies. On peut notamment choisir le dégré de créativité du modèle, c'est à dire sa capacité à choisir des tokents trés fréquents ou plus rares vu pendant la phase d'entraînement.
-
-
-Voici un exemple concret de tokénization d'une phrase. Nous allons utilisé la librairie transformers du [site Huggingface](https://huggingface.co/)
-
-Les modèles généralistes en français : 
-https://huggingface.co/models?language=fr&sort=downloads 
-
-Les modèles spécialisés en français : 
-http://nlp.polytechnique.fr/resources ( juribert)
-d'autres exemples dans le papier https://arxiv.org/abs/2110.01485 
