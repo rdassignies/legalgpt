@@ -5,10 +5,10 @@
 Le succès de ChatGPT est dû pour beaucoup à sa capacité presque mimétique de dialoguer. En greffant à GPT une mémoire des échanges et une amélioration des réponses grâce au *feedback* humain, les équipes d'openAI ont créé un agent conversationnel tellement bluffant que son utilisation s'est répandue comme une traînée de poudre. 
 Sa connaissance extensive dans presque tous les domaines lui confère un pouvoir de quasi-oracle répondant à toutes les questions que nous, pauvres humains, pouvons lui poser. 
 
-Cet enthousiasme a fait oublier à certains la nature même de GPT et les conséquences sur ses réponses. Il ne s'agit 'que' d'un modèle de langage, c'est-à-dire une machine à produire des mots selon une approche probabiliste d'où le diminutif de *stochastic parrot* que certains lui ont afffublé. La nature profonde de GPT a deux conséquences : 
+Cet enthousiasme a fait oublier à certains la nature même de GPT et les conséquences sur ses réponses. Il ne s'agit 'que' d'un modèle de langage, c'est-à-dire une machine à produire des mots selon une approche probabiliste, d'où le diminutif de *stochastic parrot* que certains lui ont afffublé. La nature profonde de GPT a deux conséquences : 
 
  - il a une "connaissance" paramétrique d'un monde figé ;
- - le modèle peut halluciner c'est à dire fournir des réponses inexactes factuellement ou de pur non-sens. 
+ - le modèle peut halluciner c'est-à-dire fournir des réponses inexactes factuellement ou de pur non-sens. 
 
 La connaissance figée est due au fait que ce type de modèle est extrémement coûteux à entraîner et qu'il n'est pas possible de le mettre à jour en temps réel. 
 
@@ -19,9 +19,9 @@ Pis, sa manière de s'exprimer avec confiance ajoute une couche dans la duperie,
 
 Cet inconvénient majeur a été également gommé par la guerre récente que se livrent Google et Microsoft concernant la recherche améliorée par ces modèles de langage. Ce n'est pas pour rien que Google n'avait pas intégré dans la version grand public son modèle maison (LaMDA). 
 
-Pourtant, il existe des parades pour se prémunir, partiellement, de ces faiblesses. L'avantage de ces approches est de pouvoir bénéficier du meilleur des deux mondes : la capacité à manipuler la langue associé au LLM et le pouvoir de rendre l'information fiable en traçant les sources. 
+Pourtant, il existe des parades pour se prémunir, partiellement, de ces faiblesses. L'avantage de ces approches est de pouvoir bénéficier du meilleur des deux mondes : la capacité à manipuler la langue associée au LLM et le pouvoir de rendre l'information fiable en traçant les sources. 
 
-Pour y parvenir, il existe trois techniques : la première, le *fine tuning*, consiste à adapter le LLM avec des données spécifiques produites et maîtrisées. La deuième consiste à piloter le LLM, *via* le prompting, pour restreindre le contexte de sa réponse. Enfin, la dernière est de mixer une approche de base de connaissance avec une capacité de recherche dont les réponses seront traitées par le LLM dans la phase finale. 
+Pour y parvenir, il existe trois techniques : la première, le *fine tuning*, consiste à adapter le LLM avec des données spécifiques produites et maîtrisées. La deuième consiste à piloter le LLM, *via* le prompting, pour restreindre le contexte de sa réponse. Enfin, la dernière est de mixer une approche de base de connaissances avec une capacité de recherche dont les réponses seront traitées par le LLM dans la phase finale. 
 
 ## Le *fine tuning* 
 
@@ -42,7 +42,7 @@ flowchart TD
 
 Le fine tuning, dans une approche de fiabilisation, des réponses n'est pas la panacée, et ce pour plusieurs raisons : 
 
- - l'ensemble obtenu reste figée au sens où il faut un ré entraînement - même minimal - pour mettre à jour les connaissances ;
+ - l'ensemble obtenu reste figé au sens où il faut un ré entraînement - même minimal - pour mettre à jour les connaissances ;
  - les données d'adaptation pèsent un poids infime face aux données d'apprentissage initial et donc n'ont que peu de poids dans le rendu final. 
 
 Pour pallier ces inconvénients, une autre approche est d'utiliser le prompting pour limiter la réponse du LLM à un contexte particulier. 
@@ -51,7 +51,7 @@ Pour pallier ces inconvénients, une autre approche est d'utiliser le prompting 
 
 Une solution simple consiste à contraindre le modèle par une instruction de type "Fourni une réponse la plus fiable possible et, si tu n'es pas sûr de ta réponse, réponds "Désolé, je ne sais pas". Ce simple prompt permet de limiter le modèle dans la confiance qu'il apporte à la réponse.  En principe... 
 
-A ce sujet, il n'existe pas à ma connaissance d'étude détaillé qui permette de faire une évaluation sur un grand nombre d'exemples. 
+A ce sujet, il n'existe pas à ma connaissance d'étude détaillée qui permette de faire une évaluation sur un grand nombre d'exemples. 
 
 De manière plus efficace, selon moi, est d'ajouter un contexte au prompt. Le contexte consiste à limiter la réponse au prompt avec un élement de contenu particulier. 
 
