@@ -55,7 +55,7 @@ Une solution simple consiste à contraindre le modèle par une instruction de ty
 Une manière plus efficiente est, selon moi, d'ajouter un contexte au prompt. Le contexte consiste à limiter la réponse au prompt par le LLM avec un élement de contenu particulier qui va restreindre sa completion comme l'illustre l'exemple suivant: 
 
 
-![Prompt GPT openAI 1](../assets/img/prompt_gpt_ccass1.png)
+|![Prompt GPT openAI 1](../assets/img/prompt_gpt_ccass1.png)|
 ![Prompt GPT openAI 1](../assets/img/prompt_gpt_ccass2.png)
 
 Cet angle semble plus prometteur et plus sûr que la première approche plus générale. Mais cela ne répond pas à la question de l'actualisation des connaissances. Cette problématique fait l'objet depuis plusieurs années de travaux de recherche. Une des solutions consiste à mixer les LLM avec des outils de recherche sémantique plus "traditionnelles"
