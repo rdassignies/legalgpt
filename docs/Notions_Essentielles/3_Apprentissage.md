@@ -30,9 +30,9 @@ Les hyperparamètres sont de deux natures :
 
 ### Illustration : journal de sortie d'entraînement d'un modèle
 
-Les lignes suivantes correspondent aux informations qui sont produites par l'entraînement d'un réseau de neurones visant à classifier des bouts de textes en plusieurs catégories (classes). Voici les informations qu'elles contiennent : 
+Les lignes suivantes correspondent aux informations produites par l'entraînement d'un réseau de neurones visant à classifier des bouts de textes en plusieurs catégories (classes). Voici les informations qu'elles contiennent : 
 
-- l'epoch est un hyperparamètre qui correspond à un cycle d'apprentissage sur les données (un passage entier) ; 
+- l'*epoch* est un hyperparamètre qui correspond à un cycle d'apprentissage sur les données (un passage entier) ; 
 - les données ne sont pas injectées en une fois dans le modèle mais sous forme de lots (batches). La taille de ces lots est un hyperparamètre ;
 - la métrique utilisée ici est l'exactitude (*accuracy*). On voit qu'elle augmente au fur et à mesure de l'apprentissage. Elle est également appliquée au jeu de données de validation (non vue pendant l'entraînement) pour évaluer le modèle à chaque cycle (epoch). 
 
