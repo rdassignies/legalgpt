@@ -25,7 +25,8 @@ Ces blocs peuvent être utiilisés séparement ou ensemble (encoder-decoder ou s
 
 ## L'entraînement
 
-Comme on l'a vu pour *word2vec*, les Transformers sont entraînés avec plusieurs approches : 
+Comme on l'a vu pour *word2vec*, les Transformers sont entraînés avec plusieurs approches :
+
 - BERT : un mot (token) est masqué aléatoirement au milieu d'une phrase, il doit être découvert. Le modèle regarde avant et après le token masqué (Encoder Bidirectionnel) ;
 - GPT : le mot(token) suivant une séquence doit être découvert. Le modèle ne regarde que la séquence d'avant (Decoder Unidirectionnel).
 

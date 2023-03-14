@@ -1,22 +1,22 @@
 # Ontologie et Knowledge Graph
 
 
-En informatique, une ontologie est "Corpus structuré de concepts, qui est modélisé dans un langage permettant l’exploitation par un ordinateur des relations sémantiques ou taxonomiques établies entre ces concepts". Dit autrement, c'est une manière structurer des connaissances en vue d'être utilisé par des machines.
+En informatique, une ontologie est un "corpus structuré de concepts, \[qui est modélisé] dans un langage permettant l’exploitation par un ordinateur des relations sémantiques ou taxonomiques établies entre ces concepts". Dit autrement, c'est une manière de structurer des connaissances en vue d'être utilisées par des machines.
 
-Les ontologies appartiennent à la branche de l'IA dit symbolique qui a pour but de reproduire le raisonnement humain en le modélisant. Elles sont intensivement utilisé en biologie, médecine mais peu dans le domaine du droit. 
+Les ontologies appartiennent à la branche de l'IA dite symbolique qui a pour but de reproduire le raisonnement humain en le modélisant. Elles sont intensivement utilisées en biologie, médecine mais peu dans le domaine du droit. 
 
 Les deux grands objectifs des ontologies sont : 
-- permettre la mise en oeuvre de raisonnements automatiques;
+- permettre la mise en œuvre de raisonnements automatiques ;
 - partager la connaissance en formalisant la représentation de la connaissance.
 
 Sur le plan conceptuel, les ontologies reposent sur trois composants : 
-- les classes qui regroupent des concepts, des choses ou des objets
-- les relations qui relient les classes entre elles; 
-- les propriétés ou les caractéristiques associées au classe. 
+- les classes qui regroupent des concepts, des choses ou des objets ;
+- les relations qui relient les classes entre elles ; 
+- les propriétés ou les caractéristiques associées aux classes. 
 
-On retrouve également ce concept dans une branche que l'on appelle le web sémantique qui vise à structurer [les pages HTML ](Elles servent aussi de fondement à ce que l'on appelle [le web sémantique](https://fr.wikipedia.org/wiki/Web_s%C3%A9mantique). )pour les traitées automatiquement. Un exemple très emblématique est [la base wikidata](https://www.wikidata.org/wiki/Wikidata:Main_Page) qui contient des centaines de milliers de noeuds reliés entre eux pour formés une base de connaissance. 
+On retrouve également ce concept dans une branche que l'on appelle le web sémantique qui vise à structurer [les pages HTML ](Elles servent aussi de fondement à ce que l'on appelle [le web sémantique](https://fr.wikipedia.org/wiki/Web_s%C3%A9mantique). )pour les traitées automatiquement. Un exemple très emblématique est [la base wikidata](https://www.wikidata.org/wiki/Wikidata:Main_Page) qui contient des centaines de milliers de nœuds reliés entre eux pour former une base de connaissance. 
 
-Les graphs de connaissance (*Knowledge Graph*) sont une  autre manière d'utilser les ontologies de manière concrète et construisant un graph fondé sur ces dernières. Ils peuvent être utilisés de manière autonome des ontologies. 
+Les graphs de connaissance (*Knowledge Graph*) sont une autre manière d'utiliser les ontologies de manière concrète et construisant un graph fondé sur ces dernières. Ils peuvent être utilisés de manière autonome des ontologies. 
 
 Pour illustrer ce concept, penchons nous sur une ontologie conceptualisant le RGPD. 
 
@@ -24,7 +24,7 @@ Pour illustrer ce concept, penchons nous sur une ontologie conceptualisant le RG
 
 Les ontologies obéissent à des principes mais la liberté prévaut. Il n'existe pas une norme mais plusieurs approches, avec leur ressemblance, pour décrire un domaine de connaissance. 
 
-Les quelques paragraphent qui suivent sont inspirés d'un papier intitulé ["GDPRtEXT - GDPR as a Linked Data Resource"](https://openscience.adaptcentre.ie/ontologies/GDPRtEXT/deliverables/docs/ontology). 
+Les quelques paragraphes qui suivent sont inspirés d'un papier intitulé ["GDPRtEXT - GDPR as a Linked Data Resource"](https://openscience.adaptcentre.ie/ontologies/GDPRtEXT/deliverables/docs/ontology). 
 
 Dans cette ontologie, on retrouve les textes juridiques découpés en chapitre, section, article, point et sous-point qui permet d'avoir une granularité fine et les concepts qui sont définis par ces textes. 
 
