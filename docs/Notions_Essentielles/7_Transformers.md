@@ -11,11 +11,11 @@ L'architecture des transformers utilise plusieurs mécanismes, parmi lesquels :
 
 - Deux blocs :
 
-	- encoder : il prend en entrée une phrase d'une longueur variable et l'encode sous forme d'un vecteur de longueur fixe qui varie en fonction du contexte (principe du plongement lexical). Dans cette phase, le mécanisme d'attention se fait sur tous les mots de la phrase à la fois : chaque mot peut 'regarder' tous les autres avant ou après lui. Cette caractéristique se retrouve dans le nom des encoder qui on comme prefix B pour Bidirectionnel. 
+	- **encoder** : il prend en entrée une phrase d'une longueur variable et l'encode sous forme d'un vecteur de longueur fixe qui varie en fonction du contexte (principe du plongement lexical). Dans cette phase, le mécanisme d'attention se fait sur tous les mots de la phrase à la fois : chaque mot peut 'regarder' tous les autres avant ou après lui. Cette caractéristique se retrouve dans le nom des encoder qui on comme prefix B pour Bidirectionnel. 
 
-	- decoder : dans cette phase, chaque mot ne peut 'regarder' qu'en arrière, les mots qui le suivent sont exclus du mécanisme d'attention. 
+	- **decoder** : dans cette phase, chaque mot ne peut 'regarder' qu'en arrière, les mots qui le suivent sont exclus du mécanisme d'attention. 
 
-Ces blocs peuvent être utiilisés séparement ou ensemble (encoder-decoder ou sequence to sequence model). L'utilisation de ces différentes parties obéit à des traitements particuliers : 
+Ces blocs peuvent être utilisés séparement ou ensemble (encoder-decoder ou sequence to sequence model). L'utilisation de ces différentes parties obéit à des traitements particuliers : 
 
 |Type | Tâches | Models |
 | -------- | ------ | ------|
