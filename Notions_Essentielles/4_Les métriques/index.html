@@ -1,0 +1,1093 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../3_Apprentissage/">
+      
+      
+        <link rel="next" href="../5_representation_des_mots_embeddings/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.2">
+    
+    
+      
+        <title>Les métriques d'évaluation - Legal GPT</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7bf56d0a.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="lime">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#les-metriques-devaluation" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="En-tête">
+    <a href="../.." title="Legal GPT" class="md-header__button md-logo" aria-label="Legal GPT" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Legal GPT
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Les métriques d'évaluation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="lime"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="lime"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Rechercher" placeholder="Rechercher" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Recherche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Effacer" aria-label="Effacer" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initialisation de la recherche
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Onglets" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../.." class="md-tabs__link">
+      Legal NLP : état des lieux
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../a_propos/" class="md-tabs__link">
+      A propos
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Enjeux_%26_R%C3%A9gulation/fiabiliiser_les_LargeLanguageModels/" class="md-tabs__link">
+        Enjeux & Régulation
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../0_Les%20principales%20t%C3%A2ches%20du%20legal%20NLP/" class="md-tabs__link md-tabs__link--active">
+        Notions Essentielles
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Projets/audit_contrat/" class="md-tabs__link">
+        Projets
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Ressources/Papiers%20de%20recherche/" class="md-tabs__link">
+        Ressources
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Legal GPT" class="md-nav__button md-logo" aria-label="Legal GPT" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Legal GPT
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Legal NLP : état des lieux
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../a_propos/" class="md-nav__link">
+        A propos
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          Enjeux & Régulation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Enjeux & Régulation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Enjeux_%26_R%C3%A9gulation/fiabiliiser_les_LargeLanguageModels/" class="md-nav__link">
+        Fiabiliser les LLM : quelques pistes
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          Notions Essentielles
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Notions Essentielles
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../0_Les%20principales%20t%C3%A2ches%20du%20legal%20NLP/" class="md-nav__link">
+        Les principales tâches du Legal NLP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_modeles_pre_entraines/" class="md-nav__link">
+        L'utilisation des modèles pré-entraînés
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_Dataset/" class="md-nav__link">
+        Les jeux de données (dataset)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_Design_modeles/" class="md-nav__link">
+        Sélection et hyperparamétrage des modèles
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_Apprentissage/" class="md-nav__link">
+        L'apprentissage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Les métriques d'évaluation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Les métriques d'évaluation
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#processus-devaluation-inter-modeles-les-benchmarks" class="md-nav__link">
+    Processus d'évaluation inter-modèles : les benchmarks
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#les-differentes-metriques" class="md-nav__link">
+    Les différentes métriques
+  </a>
+  
+    <nav class="md-nav" aria-label="Les différentes métriques">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exemple-identifier-une-clause-penale" class="md-nav__link">
+    Exemple : identifier une clause pénale
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lexactitude-accuracy" class="md-nav__link">
+    L'exactitude (accuracy)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-matrice-de-confusion" class="md-nav__link">
+    La matrice de confusion
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#precision-et-recall" class="md-nav__link">
+    Précision et Recall
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#f1-score" class="md-nav__link">
+    F1-Score
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#les-autres-metriques" class="md-nav__link">
+    Les autres métriques...
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5_representation_des_mots_embeddings/" class="md-nav__link">
+        La signature sémantique des mots
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6_decoupage_des_mots_tokens/" class="md-nav__link">
+        Le découpage des mots : les tokens
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7_Transformers/" class="md-nav__link">
+        Les Transformers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8_Ontologie_Knowledge_Graph/" class="md-nav__link">
+        Ontologie et Knowledge Graph
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../9_GPT_art_prompting/" class="md-nav__link">
+        L'art du prompting : un aperçu
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          Projets
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Projets
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Projets/audit_contrat/" class="md-nav__link">
+        Pré-audit de contrat
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          Ressources
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Ressources
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Ressources/Papiers%20de%20recherche/" class="md-nav__link">
+        Papiers de recherche
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="les-metriques-devaluation">Les métriques d'évaluation</h1>
+<p>L'évaluation des modèles de machine learning pose des problèmes particuliers. Un programme informatique traditionnel prend en entrée des données et fournit un résultat toujours identique (en principe !) en sortie. Cette logique déterministe ne peut pas s'appliquer au machine learning et, en particulier, au NLP. </p>
+<p>Revenons quelques instants sur les objectifs de ces modèles. On peut résumer leur finalité sous deux aspects : </p>
+<ul>
+<li>la prédiction d'une valeur (regression) : le quantum d'une peine, l'indemnisation d'un préjudice ou le montant d'une sanction pécuniaire ; </li>
+<li>la classification : la nature de la clause d'un contrat, l'issue d'un pourvoi en cassation (rejet, cassation), le type de matière (droit social, commercial, civil) traité par une décision de justice ou un contrat. Le modèle doit déterminer à quelle classe le texte appartient : il doit lui attribuer un label. </li>
+</ul>
+<blockquote>
+<p>Et GPT, classification ou regression ? 
+Dans les modèles de type [[Glossaire#Decoder]], l'objectif du modèle est de prédire un mot en fonction du contexte (la séquence des mots précédents). Pour ce faire, il fournit une répartition des probabilités concernant chaque mot du vocabulaire. En cela, il s'agit d'un classifieur multi-classes. </p>
+</blockquote>
+<h2 id="processus-devaluation-inter-modeles-les-benchmarks">Processus d'évaluation inter-modèles : les benchmarks</h2>
+<p>Le monde académique a élaboré, au fil des ans, des jeux de données de références permettant d'évaluer les différents modèles. On peut faire trois remarques à propos de ces <em>dataset</em> : </p>
+<ul>
+<li>en quelques années, on est passé de données d'évaluation mono-tâche (reconnaissance d'entités nommées, Part Of Speech...) à des <a href="https://openreview.net/pdf?id=rJ4km2R5t7">approches plus généralistes et se rapprochant des activités humaines</a> comme répondre à des questions ou dialoguer ;</li>
+<li>ils permettent d'établir des comparaisons entre les modèles en présentant des jeux de données strictement identiques ;</li>
+<li>les métriques finalement calculées sont agnostiques vis-à-vis des modèles. </li>
+</ul>
+<h2 id="les-differentes-metriques">Les différentes métriques</h2>
+<h4 id="exemple-identifier-une-clause-penale">Exemple : identifier une clause pénale</h4>
+<p>Prenons comme exemple un programme chargé d'identifier la nature d'une clause dans un contrat. Dans le cadre d'un audit, on l'entraîne pour reconnaître la présence de clauses pénales. Il opére une <a href="https://datafranca.org/wiki/Classification_binaire">classification binaire </a>: la clause est une clause pénale (positif) ou n'est pas une clause pénale (négatif). </p>
+<p>Pour entraîner le modèle, on lui fournit un grand nombre d'exemples de clauses avec deux colonnes : la première comprend le texte, la seconde comprend la classe (0 : pas une clause pénale, 1: clause pénale). </p>
+<p>Une fois entraîné, on lui soumet un jeu de données identiques qu'il n'a pas vu lors de la phase d'apprentissage, et on lui demande de classer les clauses. </p>
+<p>Voici les résultats : </p>
+<table>
+<thead>
+<tr>
+<th>Contrats</th>
+<th>clause pénale ?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Clause 1</td>
+<td>[0.4, 0.6]</td>
+</tr>
+<tr>
+<td>Clause 2</td>
+<td>[0.6, 0.4]</td>
+</tr>
+<tr>
+<td>Clause 3</td>
+<td>[0.9, 0.1]</td>
+</tr>
+<tr>
+<td>Clause 4</td>
+<td>[0.2, 0.8]</td>
+</tr>
+<tr>
+<td>Clause n</td>
+<td>[0.7, 0.3]</td>
+</tr>
+</tbody>
+</table>
+<p>On constate avec étonnement  que le modèle ne sort pas un 1 (oui, il y a une clause pénale) et un 0 (non, pas de présence de clause pénale). Le résultat en sortie est constitué de deux valeurs qui correspondent à la probabilité que la clause soit oui (1) ou non (0) une clause pénale. Nous ne sommes pas dans une logique automatique : le modèle ne fait que produire une estimation probabiliste. Il n'est pas certain de la classe d'appartenance. </p>
+<p>Par exemple, pour la clause 1, le modèle estime qu'il y a 60% (0,6) de chance qu'elle soit une clause pénale (classe 1 ou positif) et 40% qu'elle n'en soit pas une (classe 0 ou négatif). </p>
+<p>La somme de ces deux nombres est systématiquement 1. En effet, il y a 100% de chance que la clause appartienne à une seule des deux catégories. C'est un classifieur binaire. Si l'on souhaitait classer une clause selon plusieurs classes (clause pénale, clause abusive, de non-concurrence), la somme des probabilités serait toujours 1 et le modèle produirait une répartition des probabilités entre les classes. Pour obtenir la plus probable, on sélectionnerait la classe ayant la probabilité la plus forte. </p>
+<p>Dès lors, on peut se poser deux questions : </p>
+<ul>
+<li>à partir de quel taux de probabilité, estime-t-on que l'on est en présence d'une clause pénale ? </li>
+<li>si l'on fixe ce taux, disons à 50%, comment le modèle classe-t-il mes clauses par rapport à la réalité ? Dit autrement, quel est son taux d'erreur ? </li>
+</ul>
+<p>Pour évaluer ce taux, il existe plusieurs métriques qu'il est important de connaître. Ces métriques s'appliquent à toutes les opérations de classification. Elles ont des impacts directs sur l'évaluation des systèmes d'Intelligence artificielle bien au-delà du NLP. </p>
+<h3 id="lexactitude-accuracy">L'exactitude (accuracy)</h3>
+<p>C'est la mesure la plus simple à comprendre. Parmi toutes les clauses que je lui ai montrées, combien de fois le modèle a-t-il prédit correctement la présence d'une clause pénale ? </p>
+<p>Imaginons  que notre jeu de données d'évaluation porte sur 1000 clauses. Dans notre jeu de test, on sait que 300 clauses sont des clauses pénales. </p>
+<p>Le résultat du classement opéré par le modèle est le suivant : </p>
+<ul>
+<li>240 clauses pénales classées comme clause pénale (Vrai positif : 1 classé en 1)</li>
+<li>80 non clauses pénales classées comme clause pénale (Faux positif : 0 classé en 1)</li>
+<li>620 non clauses pénales classées comme non clause pénale (Vrai négatif : 0 classé en 0)</li>
+<li>60 clauses pénales classées comme non clause pénale (Faux négatif : 1 classé en 0 )</li>
+</ul>
+<p>Le modèle a fait des erreurs ! C'est-à-dire qu'il a mal classé certaines clauses. </p>
+<p><img alt="Clauses pénales classification" src="../../assets/img/metrics_1_clausespenales.drawio.png" /></p>
+<p>Si l'on veut évaluer l'exactitude du modèle, on peut évaluer le nombre de fois où il attribue correctement la bonne classe aux clauses : sur 1000 clauses, il a classé correctement respectivement 620 et 240 clauses correctement soit 860/1000 ou 86% d'exactitude. C'est un très bon score. Trop bon ? </p>
+<p>Imaginons que le modèle ait classé toutes les clauses en non clause pénale soit la classe 0. Il aurait donc classé comme négatives et avec exactitude 70% des clauses puisqu'on sait que 700/1000 clauses ne sont pas des clauses pénales.  Il est relativement performant mais est-il utile ? En effet, si l'on veut auditer un ensemble de contrats et identifier la présence de clauses spécifiques, il faut pouvoir discriminer les clauses pénales des autres. Précisément, cette mesure ne donne que la performance à classer correctement mais pas la performance à attribuer la classe qui nous intéresse. C'est pour cela, qu'il faut élaborer une autre approche en utilisant une technique appelée <strong>la matrice de confusion</strong>. </p>
+<h3 id="la-matrice-de-confusion">La matrice de confusion</h3>
+<p>La matrice de confusion est construite en comparant les prédictions faites par le modèle et la réalité. Elle va être utilisée pour calculer les métriques de classification. </p>
+<p>Dans notre exemple, cette matrice se présente de la manière suivante : </p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Prédiction : clause pénale (1)</th>
+<th>Prédiction : pas clause pénale (0)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Réalité : clause pénale (1)</td>
+<td>240</td>
+<td>60</td>
+</tr>
+<tr>
+<td>Réalité : pas clause pénale (0)</td>
+<td>80</td>
+<td>620</td>
+</tr>
+</tbody>
+</table>
+<p>Les lignes représentent la réalité, c'est-à-dire les clauses associées aux classes dans notre jeu de données d'évaluation. Les colonnes représentent les prédictions faites par le modèle. 
+Dans la colonne 1, le modèle a prédit correctement 240 clauses (Vrai positif) et il s'est trompé sur 80 clauses mal attribuées (Faux positif).</p>
+<p>Cependant, on peut modifier ce chiffre assez facilement en jouant sur le seuil d'attribution au-delà duquel le modèle attribue la classe 1 ou 0. On a vu plus haut que les données de sortie sont des probabilités que la clause appartienne à la classe 1 ou 0 et non directement 1 ou 0. Il est possible de modifier le seuil de déclenchement. Par exemple, on peut estimer qu'il faut que le modèle attribue une probabilité de plus 0,7 pour considérer qu'une clause est une clause pénale. Si on joue sur ce facteur, que se passe t-il ? </p>
+<p>Le graphique suivant illustre les conséquences de la modification du seuil de déclenchement. </p>
+<p><img alt="Precision Recall clause pénale" src="../../assets/img/repartition_metrics_clausepenales.png" /></p>
+<p>Si l'on augmente le seuil au-delà duquel le modèle considère que la clause est une clause pénale (classe 1), il y a un effet de vases communicants :</p>
+<ul>
+<li>les faux positifs diminuent et viennent alimenter les vrais négatifs ;</li>
+<li>les vrais positifs diminuent et viennent alimenter les faux négatifs.</li>
+</ul>
+<p>Le choix de ce seuil a des effets concrets sur les prévisions et les objectifs que l'on se fixe.  Si l'on privilégie un seuil élevé, on détectera moins de clauses pénales dans nos documents mais avec une certitude plus grande.  Dans le même temps, beaucoup de clauses pénales ne seront pas identifiées comme telles (augmentation des Faux Négatifs).
+A l'inverse, si l'on baisse le seuil de déclenchement, on aura beaucoup de clauses non pénales mal classées (Faux Positifs) ce qui demandera un travail supplémentaire en aval. </p>
+<p>Ces enjeux ne sont pas propres au NLP. Leur compréhension permet de placer le débat sur d'autres terrains si l'on substitue à la détection de clause, un classement concernant la dangerosité d'un individu ou son risque de récidive en matière pénale. Le seuil de déclenchement illustre des problèmatiques plus fondamentales entre liberté (seuil élevé) et sécurité (seuil bas). </p>
+<p>On a détaillé les effets du seuil de déclenchement sur notre matrice de confusion mais nous n'avons pas détaillé les métriques qu'on peut en tirer. Les métriques de base des modèles de classification sont la Précision et le Recall (Rappel).</p>
+<h3 id="precision-et-recall">Précision et Recall</h3>
+<p>Lors de l'audit de documents, et si l'on souhaite identifier des clauses spécifiques, on aimerait identifier deux indicateurs pour évaluer notre système. </p>
+<p>Le premier, nommé <strong>Précision</strong>, mesure le taux d'erreurs du modèle quand il fait une prédiction positive. Pour cela, il suffit de faire le rapport entre le nombre de Vrai Positif (VP) divisé par la totalité des prédictions positives (VP+FP ). Plus ce taux est élevé, plus le modèle est précis. </p>
+<p>Toutefois, cet indicateur se borne à compter, parmi les clauses sélectionnées (<em>cf. schema supra</em>), celles qui sont bien classées. Mais il existe également des clauses positives qui sont classées comme négatives (Faux Négatif). Par conséquent, cet indicateur ne répond pas à la question sur l'efficacité à sélectionner les clauses positives. </p>
+<p>Pour illustrer cela, prenons un cas extrême. Mettons un seuil de déclenchement au-delà de 0.8. Dans ce cas, selon notre schéma, il n'y a plus de Faux Positif (FP), la Précision est donc de 100%. Mais quid des nombreux Faux Négatifs créé par ce seuil ? Comment affectent-ils mon modèle ? </p>
+<p>Pour répondre à cette question, une autre mesure, le Recall ou Rappel permet de calculer le taux de positifs calculé par le modèle en prenant en compte l'ensemble des clauses positives (VP +FN) et non simplement celles que le modèle considère comme positives. </p>
+<p>Dès lors, quel est <strong>le rapport entre ces deux indicateurs ?</strong></p>
+<p>Dans notre exemple du seuil à 80%, la Précision était montée à 100% mais quid du Recall ? 
+Le Recall était descendu plombé par le nombre de Faux Négatifs créés par cette modification du seuil. Il y a donc une liaison entre les deux indicateurs. Si je baisse mon seuil de déclenchement à 10%, le modèle a maintenant un Recall de 100% selon notre schéma. En effet, il a sélectionné correctement tous les positifs puisqu'il met toutes les clauses dans le même panier ! La Précision plonge en raison de l'augmentation des Faux Positifs. </p>
+<p>Le but est de trouver un seuil de déclenchement qui soit optimal, c'est-à-dire qui maximise la paire Précision/Recall en fonction des objectifs fixés. La manière mathématique de trouver et d'évaluer cet optimum dépasse largement l'objet de cet article. </p>
+<p>Toutefois, on peut aborder cet optimum en se posant une question simple : est-ce que l'objectif est d'être précis - peu de faux positifs - ou d'être plus exhaustif  dans la détection en minimisant les faux négatifs ?  Prenons l'exemple, de la détection des fausses nouvelles (<em>fake news</em>) : </p>
+<ul>
+<li>une grande Precision minimisera les Faux Positifs et donc favorisera la liberté d'expression : on ne détecte pas toutes les <em>fake news</em> mais quand on les détecte, le système est plus précis ou "confiant" ; </li>
+<li>un grand Recall maximisera les Faux Positifs : on identifie plus de <em>fake news</em> (Vrais Positifs) mais l'effet de bord est l'augmentation du nombre de textes mal classifiés (Faux Positifs) en portant atteinte à la liberté d'expression. </li>
+</ul>
+<p>Pour trouver un équilibre entre ces deux métriques, il existe un indicateur qui les synthétise : <strong>le F1 Score</strong>.</p>
+<h3 id="f1-score">F1-Score</h3>
+<p>Le F1-Score est la<a href="https://fr.wikipedia.org/wiki/Moyenne_harmonique"> moyenne des deux taux</a>, Précision et Recall. </p>
+<p>F1-Score = 2 x ( (Precision x Recall) / (Precision + Recall) )</p>
+<p>Cette moyenne suit, par construction, l'évolution de ces deux indicateurs. Elle varie entre 0 et 1. Plus elle est proche de 1, meilleur est le modèle. </p>
+<blockquote>
+<p>La Precision et le Recall n'évoluent pas exactement de la même manière. Mécaniquement quand l'un baisse l'autre n'augmente pas d'autant. Cette dissociation fait qu'il existe un compromis entre ces deux indicateurs. Ce compromis peut être trouvé en optimisant le F1-Score.</p>
+</blockquote>
+<p>Pour reprendre notre exemple des <em>fake news</em>, on peut vouloir un système qui, tout en préservant la liberté d'expression assure une détection assez large de ces contenus. Cet équilibre sera trouvé grâce à cette métrique. </p>
+<blockquote>
+<p><strong>Et les humains ?</strong> Il est courant de trouver le F1 Score des humains dans les benchmarks pour nous comparer aux modèles. En effet, les humains n'ont pas un score de 100 % car ils font des erreurs surtout dans les tâches élaborées. </p>
+</blockquote>
+<h3 id="les-autres-metriques">Les autres métriques...</h3>
+<p>Les tâches effectuées par les modèles sont parfois plus complexes qu'une classification binaire. Pour accompagner ces raffinements, les métriques sont adaptées comme dans le cadre de la classification multi-classes ou sont spécifiques à un domaine comme la traduction (BLEU) ou intrinsèque à un modèle (Perplexity). Cela fera l'objet de développements ultérieurs. </p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Retour en haut de la page
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2023 <a href="https://github.com/rdassignies"  target="_blank" rel="noopener">Raphaël d'Assignies</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/rdassignies" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/in/raphaeldassignies/" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
+        <div class="md-consent__overlay"></div>
+        <aside class="md-consent__inner">
+          <form class="md-consent__form md-grid md-typeset" name="consent">
+            
+
+
+
+
+  
+
+
+<h4>Cookie consent</h4>
+<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our documentation better.</p>
+<input class="md-toggle" type="checkbox" id="__settings" >
+<div class="md-consent__settings">
+  <ul class="task-list">
+    
+  </ul>
+</div>
+<div class="md-consent__controls">
+  
+    
+      <button class="md-button md-button--primary">Accepter</button>
+    
+    
+    
+  
+    
+    
+    
+      <label class="md-button" for="__settings">Paramétrer vos choix</label>
+    
+  
+</div>
+          </form>
+        </aside>
+      </div>
+      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout(function(){document.querySelector("[data-md-component=consent]").hidden=!1},250);var action,form=document.forms.consent;for(action of["submit","reset"])form.addEventListener(action,function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map(function(e){return[e,!0]}))),location.hash="",location.reload()})</script>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.tracking", "toc.follow", "toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.fc8c2696.min.js"></script>
+      
+        <script src="https://embed.trydyno.com/embedder.js"></script>
+      
+    
+  </body>
+</html>
