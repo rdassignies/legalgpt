@@ -6,17 +6,18 @@ En informatique, une ontologie est un "corpus structuré de concepts, \[qui est 
 Les ontologies appartiennent à la branche de l'IA dite symbolique qui a pour but de reproduire le raisonnement humain en le modélisant. Elles sont intensivement utilisées en biologie, médecine mais peu dans le domaine du droit. 
 
 Les deux grands objectifs des ontologies sont : 
+
 - permettre la mise en œuvre de raisonnements automatiques ;
 - partager la connaissance en formalisant la représentation de la connaissance.
 
+
 Sur le plan conceptuel, les ontologies reposent sur trois composants : 
+
 - les classes qui regroupent des concepts, des choses ou des objets ;
 - les relations qui relient les classes entre elles ; 
 - les propriétés ou les caractéristiques associées aux classes. 
 
 On retrouve également ce concept dans une branche que l'on appelle le web sémantique qui vise à structurer [les pages HTML ](Elles servent aussi de fondement à ce que l'on appelle [le web sémantique](https://fr.wikipedia.org/wiki/Web_s%C3%A9mantique). )pour les traiter automatiquement. Un exemple très emblématique est [la base wikidata](https://www.wikidata.org/wiki/Wikidata:Main_Page) qui contient des centaines de milliers de nœuds reliés entre eux pour former une base de connaissance. 
-
-Les graphs de connaissance (*Knowledge Graph*) sont une autre manière d'utiliser les ontologies de manière concrète et construisant un graph fondé sur ces dernières. Ils peuvent être utilisés de manière autonome des ontologies. 
 
 Pour illustrer ce concept, penchons-nous sur une ontologie conceptualisant le RGPD. 
 
@@ -34,9 +35,13 @@ Voici une visualisation de l'ontologie originale [au format OWL](https://www.w3.
 
 On y aperçoit toute une série de concepts : le consentement de la personne concernée, les activités sur responsable de traitement, les exceptions ou les grands principes. Ces concepts sont organisés hierarchiquement ou de manière transverse via une relation d'implication ('involves'). Ils sont rattachés au texte *via* une relation nommée 'is defined by'. 
 
-Ces liens font sens dans le cadre du RGPD et permettent de s'y retrouver dans un ensemble assez touffu. L'ontologie peut être utilisée pour servir de grille d'audit par exemple. Mais, pour aller plus loin, on peut intégrer cette ontologie dans une structure plus souple mais plus puissante : les *Knowledge Graph*. 
+Ces liens font sens dans le cadre du RGPD et permettent de s'y retrouver dans un ensemble assez touffu. L'ontologie peut être utilisée pour servir de grille d'audit par exemple. Mais, pour aller plus loin, on peut intégrer cette ontologie dans une structure plus souple mais plus puissante : les *Knowledge Graph*.
 
 ### Un exemple d'intégration et d'utilisation dans neo4j 
+
+Le graph de connaissance (*Knowledge Graph*) est une manière souple de représenter les ontologies. Sa structure, sous forme de binôme nœud/relation permet de coller aux schémas des ontologies. 
+
+Cette forme de base de données, associée à des langages d'interrogation très puissants comme SparQL ou Cipher, permet de nombreuses applications à partir des ontologies et des données associées.
 
 Les *Knowledge Graph* sont utilisés dans des domaines très variés et présentent des caractéristiques avantageuses parmi lesquelles : 
 - une très grande liberté dans l'organisation des données ;
