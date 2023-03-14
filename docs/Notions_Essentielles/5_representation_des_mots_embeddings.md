@@ -10,7 +10,7 @@ Les mots qui interviennent dans des contextes similaires tendent à avoir une si
 
 #### Compter le nombre de mots par document
 
-Prenons plusieurs phrases afin d'lllustrer notre propos. 
+Prenons plusieurs phrases afin d'illustrer notre propos. 
 
 
 ```py
@@ -124,10 +124,10 @@ Par exemple, le mot avocat peut être vu dans le contexte de la nourriture ou de
 
 Une première approche a consisté à ajouter au vecteur de base, d'autres vecteurs qui matérialisent d'autres contextes. Ainsi le vecteur initial se verra enrichi et affiné en fonction d'autres contextes sémantiques. 
 
-Dans cette optique, le mot 'avocat' dans les phrases 'l'avocat a livré une plaidoirie au vitriol" et "la salade d'avocat était délicieuse", aura clairement des vecteurs de contextes différents en plus de vecteur représetant la sémantique de base du mot.
+Dans cette optique, le mot 'avocat' dans les phrases 'l'avocat a livré une plaidoirie au vitriol" et "la salade d'avocat était délicieuse", aura clairement des vecteurs de contextes différents en plus de vecteurs représentant la sémantique de base du mot.
 
-Cette solution était obtenu en entraînant des réseaux dits récurrents (RNN). Le but était de découvrir le mot suivant en fonction d'une séquence précédente. Le langage a besoin de mémoire pour fonctionner efficacement. En effet, pour deviner un mot, il faut que je connaisse les mots précédents. Cette architecture permettait de mémoriser l'information. 
+Cette solution était obtenue en entraînant des réseaux dits récurrents (RNN). Le but était de découvrir le mot suivant en fonction d'une séquence précédente. Le langage a besoin de mémoire pour fonctionner efficacement. En effet, pour deviner un mot, il faut que je connaisse les mots précédents. Cette architecture permettait de mémoriser l'information. 
 
 Bien qu'efficace, de nombreux problèmes techniques rendait cette solution lente et difficile à entraîner. 
 
-Face à ce problème, des chercheurs ont proposé une architecture qui allait révolutionner le domaine : les Transformers. 
+Face à ce problème, des chercheurs ont proposé une architecture qui allait révolutionner le domaine : **les Transformers**. 
