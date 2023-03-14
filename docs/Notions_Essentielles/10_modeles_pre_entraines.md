@@ -1,9 +1,9 @@
 # L'utilisation des modèles pré-entraînés
 
 
-En matière de traitement du language, il est extrémement fréquent d'avoir recours à un modèle déjà existant que l'on re-entraîne sur des tâches spécifiques. 
+En matière de traitement du langage, il est extrémement fréquent d'avoir recours à un modèle déjà existant que l'on ré-entraîne sur des tâches spécifiques. 
 
-Ce phénomène est d'abord apparu avec les images au début des années 2010 puis, à partir de 2018 et la sortie du modèle [BERT](https://arxiv.org/abs/1810.04805), s'est invité dans le monde du NLP. 
+Ce phénomène est d'abord apparu avec les images au début des années 2010 puis, à partir de 2018 et la sortie du modèle [BERT](https://arxiv.org/abs/1810.04805), il s'est invité dans le monde du NLP. 
 
 Auparavant, les tâches étaient silotées ainsi que les équipes de recherche. On distinguait classiquement plusieurs catégories :
 
